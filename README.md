@@ -1,5 +1,8 @@
 # Ex. No:1b 			Study of Client Server Chat Applications
 
+Name : MOHAN RAJ.C
+
+Register Number : 212223040114
 ## Aim: 
 To perform a study on Client Server Chat Applications
 ## Introduction:
@@ -73,6 +76,59 @@ Client-server chat applications are versatile tools that facilitate real-time co
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
 
+
+### Client Program:
+```
+import socket
+
+s = socket.socket()
+host = input(str('Enter hostname or host IP : '))
+port = 8080
+s.connect((host, port))
+print('Connected to chat server')
+while 1:
+    incoming_message = s.recv(1024)
+    incoming_message = incoming_message.decode()
+    print(' Server : ', incoming_message)
+    print()
+    message = input(str('>> '))
+    message = message.encode()
+    s.send(message)
+    print('Sent')
+    print()
+```
+
+### Server Program:
+```
+import socket
+
+s = socket.socket()
+host = socket.gethostname()
+print(' Server will start on host : ', host)
+port = 8080
+s.bind((host, port))
+print()
+print('Waiting for connection')
+print()
+s.listen(1)
+conn, addr = s.accept()
+print(addr, ' Has connected to the server')
+print()
+while 1:
+    message = input(str('>> '))
+    message = message.encode()
+    conn.send(message)
+    print('Sent')
+    print()
+    incoming_message = conn.recv(1024)
+    incoming_message = incoming_message.decode()
+    print(' Client : ', incoming_message)
+    print()
+```
+
+###output
+
+![321698294-daa44d4a-3b1c-4e5a-b634-3d93f6319e56](https://github.com/Mohanraj2006/ChatStudy/assets/152195759/3c432ae8-e3ee-4c9e-96c7-88bede1eb8de)
 
 ## Result:
 
